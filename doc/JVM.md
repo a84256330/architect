@@ -430,8 +430,8 @@ total = eden + 1个survivor
 ### 什么是调优？
 
 1. 根据需求进行JVM规划和预调优
-2. 优化运行JVM运行环境（慢，卡顿）
-3. 解决JVM运行过程中出现的各种问题(OOM)
+2. 优化运行JVM运行环境（慢，卡顿） cpu 占用高 一般用jstack 看否死锁，或者jstat 看stw
+3. 解决JVM运行过程中出现的各种问题(OOM) 内存快照，stack 就看普通log
 
 其实完全不是如此，真正的JVM优化，就是一些内存分配+垃圾回收器的选择（ParNew、CMS、G1）+垃圾回收器的常见参数设置，还有就是一些代码层面的内存泄漏问题，其实搞定这些问题，99%的JVM性能问题你都能搞定了！
 
@@ -469,6 +469,17 @@ oom : 产生的位置，方法区，堆内存，栈空间
 
 #### jstat
 
+jstat -gc pid 1000 10
+
+查看ygc频率，和每次ygc进入老年代内存
+
+新生代对象增长速率，每次ygc,fgc耗时
+
+#### jstack
+死锁，Deadlock（重点关注） 
+等待资源，Waiting on condition（重点关注） 
+•  等待获取监视器，Waiting on monitor entry（重点关注） 
+阻塞，Blocked（重点关注） 
 可以观察对象增长速率，ygc触发频率，ygc耗时，有多少存活，有多少进入老年代，老年代对象增长速率，FGC频率，FGC耗时
 
 #### jmap
@@ -518,7 +529,6 @@ jhat dump.hprof -port 7000
 jstat 分析log gc时间几百毫秒，日志查看是否oom,猜是进程杀掉，但被脚本唤醒，最后mat 查出ClassLoader类加载器一大推
 
 + 频繁fgc log正常，代码写了system.gc()
-
 + cpu 过高 
 
 ​        同时运行过多线程

@@ -18,27 +18,54 @@
 public class 两数相加 {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 
-        // 设置哑节点
-        ListNode head = new ListNode(0);
-        ListNode cur = head;
-        int carry = 0;
+        int n1 = 0;
+        int n2 = 0;
+        int n = 0;
+        int ca = 0;
+        ListNode v1 = l1;
+        ListNode v2 = l2;
+        ListNode pre = null;
+        ListNode node =null;
 
-        while(l1 != null || l2 != null){
-            int p = l1 != null ? l1.val : 0;
-            int q = l2 != null ? l2.val : 0;
+        while (v1!=null || v2!=null){
+            n1 = v1!=null?v1.val:0;
+            n2 = v2!=null?v2.val:0;
 
-            int sum = p + q + carry;
-            carry = sum / 10;
-            sum = sum % 10;
-            cur.next = new ListNode(sum);
+            n = n1 + n2 + ca;
 
-            cur = cur.next;
-            if(l1 != null) l1 = l1.next;
-            if(l2 != null) l2 = l2.next;
+            pre = node;
+            node = new ListNode(n%10);
+            node.next = pre;
 
-            if(carry==1) cur.next = new ListNode(carry);
+            ca = n/10;
+
+            v1 = v1!=null?v1.next:null;
+            v2 = v2!=null?v2.next:null;
         }
-        return head.next;
+
+        if (ca==1) {
+            pre = node;
+            node = new ListNode(1);
+            node.next = pre;
+        }
+        return reverseList(node);
+    }
+
+    /**
+     * 7 -> 0 -> 8 ==> 8 -> 0 -> 7
+     * @param head
+     * @return
+     */
+    public static ListNode reverseList(ListNode head) {
+        ListNode pre = null;
+        ListNode next = null;
+        while (head != null) {
+            next = head.next;// next = 0 , head.next = 0
+            head.next = pre;// pre = null , head.next = null
+            pre = head;// pre = 7 , head.next = null
+            head = next;// head = 0 , head.next = 0
+        }
+        return pre;
     }
 }
 
@@ -54,5 +81,11 @@ class ListNode {
                 "val=" + val +
                 ", next=" + next +
                 '}';
+    }
+
+    public static void main(String[] args) {
+
+         StringBuilder sb = new StringBuilder();
+        System.out.println(sb.length());
     }
 }

@@ -70,22 +70,22 @@ public class 两数相加 {
 }
 
 
-class ListNode {
-     int val;
-     ListNode next;
-     ListNode(int x) { val = x; }
-
-    @Override
-    public String toString() {
-        return "ListNode{" +
-                "val=" + val +
-                ", next=" + next +
-                '}';
-    }
-
-    public static void main(String[] args) {
-
-         StringBuilder sb = new StringBuilder();
-        System.out.println(sb.length());
-    }
-}
+//class ListNode {
+//     int val;
+//     ListNode next;
+//     ListNode(int x) { val = x; }
+//
+//    @Override
+//    public String toString() {
+//        return "ListNode{" +
+//                "val=" + val +
+//                ", next=" + next +
+//                '}';
+//    }
+//
+//    public static void main(String[] args) {
+//
+//         StringBuilder sb = new StringBuilder();
+//        System.out.println(sb.length());
+//    }
+//}

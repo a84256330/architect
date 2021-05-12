@@ -1,7 +1,4 @@
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 
 /**
  * @program: architect
@@ -20,6 +17,12 @@ public class FutureService {
         System.out.println("main run");
         System.out.println("zi result" + submit.get());
         System.out.println("main end");
+
+        ExecutorService executorService1 = Executors.newFixedThreadPool(1);
+        FutureTask futureTask = new FutureTask(()->"123");
+        executorService1.submit(futureTask);
+        executorService1.shutdown();
+        System.out.println("FutureTast:"+futureTask.get());
 
     }
 }

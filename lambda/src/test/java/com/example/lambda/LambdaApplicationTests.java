@@ -4,9 +4,9 @@ import com.example.lambda.bo.Apple;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @SpringBootTest
 class LambdaApplicationTests {
@@ -42,5 +42,57 @@ class LambdaApplicationTests {
 
         System.out.println(apple4.getString(String :: new));
     }
+
+    @Test
+    void lambdaPeek(){
+        Apple apple1 = new Apple("红富士", "Red", 280);
+        Apple apple2 = new Apple("冯心", "Yello", 470);
+        Apple apple3 = new Apple("大牛", "Red", 320);
+        Apple apple4 = new Apple("小小", "Green", 300);
+
+        List<Apple> appleList = Arrays.asList(apple1, apple2, apple3, apple4);
+        // 打印
+//        appleList.forEach(System.out::println);
+
+        List<Apple> s = appleList.stream().peek(t -> t.setName("s")).collect(Collectors.toList());
+        System.out.println(s);
+        System.out.println(appleList);
+        System.out.println(Objects.equals(s, appleList));
+        appleList.stream().peek(Apple::getColor);
+    }
+
+    @Test
+    void lambdaMap(){
+        Apple apple1 = new Apple("红富士", "Red", 280);
+        Apple apple2 = new Apple("冯心", "Yello", 470);
+        Apple apple3 = new Apple("大牛", "Red", 320);
+        Apple apple4 = new Apple("小小", "Green", 300);
+
+        List<Apple> appleList = Arrays.asList(apple1, apple2, apple3, apple4);
+
+        List<Apple> s = appleList.stream().map(t -> {
+            t.setName("s");
+            return t;
+        }).collect(Collectors.toList());
+        System.out.println(s);
+        System.out.println(appleList);
+        System.out.println(Objects.equals(s, appleList));
+    }
+
+    @Test
+    void lambdaMapGroup(){
+        Apple apple1 = new Apple("红富士", "Red", 280);
+        Apple apple2 = new Apple("冯心", "Yello", 470);
+        Apple apple3 = new Apple("大牛", "Red", 320);
+        Apple apple4 = new Apple("小小", "Green", 300);
+
+        List<Apple> appleList = Arrays.asList(apple1, apple2, apple3, apple4);
+
+        Map<String, Apple> collect = appleList.stream().peek(t -> t.setWeight(t.getWeight() + 1D)).collect(Collectors.toMap(Apple::getName, Function.identity(), (k1, k2) -> k1));
+
+        System.out.println(collect);
+
+    }
+
 
 }

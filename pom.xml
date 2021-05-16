@@ -11,8 +11,9 @@
   <modules>
     <module>io</module>
     <module>threads</module>
-      <module>leetcode</module>
-      <module>rxjava</module>
+    <module>leetcode</module>
+    <module>rxjava</module>
+    <module>lambda</module>
   </modules>
 
   <name>architect</name>

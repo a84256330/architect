@@ -25,7 +25,7 @@ public class 反转链表 {
         ListNode a = head;
         ListNode b = null;
 
-        while(a.next!=null){
+        while(a!=null){
             ListNode temp = a.next;
             a.next = b;
             b = a;
